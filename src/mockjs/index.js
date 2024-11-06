@@ -22,6 +22,10 @@ Mock.mock(/\/think\/query\/questions/, 'get', (options) => Think.getQueryQuestio
 
 Mock.mock(/\/think\/delete\/questions/, 'post', (options) => Think.deleteQuestions(options));
 
-Mock.mock(/\/think\/query\/page\/questions/, 'post', (options) => Think.getQueryPageQuestions(options))
+Mock.mock(/\/think\/query\/page\/questions/, 'post', (options) => Think.getQueryPageQuestions(options));
+
+Mock.mock(/\/think\/jobs\/query/, 'post', (opt) => Think.JobQueryPage(opt));
+
+Mock.mock(/\/thinkhome\/jobs\/delete/, "post", (opt) =>  Think.JobDeleteItem(opt));
 
 

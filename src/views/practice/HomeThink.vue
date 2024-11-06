@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted } from 'vue';
 import { options, deleteQueryQuestions, queryQuestionByPage} from '@/axios/thinkRequest'
-import { showNo } from './think/ThinkData';
+import { changeCurrent } from './think/ThinkData';
 
 // 定义select的已选中的标签
 const form = ref({
@@ -31,8 +31,9 @@ const handleMyJobs = () => {
     // 动态组件
     // 修改ThinkFrame.vue中的current.value的值
     // 修改ThinkData.js中的响应式变量，修改为2
-    console.log(form.value);
-    showNo.value = 2;
+    // console.log(form.value);
+    // showNo.value = 2;
+    changeCurrent('ThinkMyJobs');
 }
 
 const handleLevelChange = (value) => {
@@ -116,16 +117,6 @@ const freshPageData = () => {
     });
 
 }
-
-// const requestQueryQuestions = (value) => {
-//     queryQuestion(value).then(res => {
-//         console.log("queryQuestion.then");
-//         console.log(res);
-//         tableData.value = res.data.tableData;
-//     }).catch(err => {
-
-//     });
-// }
 
 const handelQuery = () => {
     // if(form.value.chapter !== '') requestQueryQuestions(form.value.chapter);
@@ -224,6 +215,7 @@ const LMC = computed(() => {
             :background="true"
             layout="total, prev, pager, next, ->, jumper, sizes"
             :total="page.total"
+            :hide-on-single-page="true"
             @size-change="freshPageData"
             @current-change="freshPageData"
         />

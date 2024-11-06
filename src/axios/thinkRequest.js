@@ -53,3 +53,22 @@ export const chapters = (data)=> {
         }
     );
 }
+
+export const queryJobs = (data) => {
+    return instance(
+        {
+            method: 'post',
+            url: '/think/jobs/query',
+            data,
+        }
+    );
+}
+
+export const ThinkJobDelete = (data) => {
+    return instance({
+        method: 'post',
+        url: '/thinkhome/jobs/delete',
+        data: data
+    });
+}
+

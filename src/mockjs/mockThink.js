@@ -1,4 +1,3 @@
-
 const options=[
     {
       label:'一、语言及算法基础篇',
@@ -805,6 +804,109 @@ const TestDB=[
   {LMC:'L4-2',id:4120, title:'【例1.10】牛吃牧草',  pass:71189,  submit:114202,pdfString:''}, 
 ]
 
+const Jobs=[
+  {username:'admin',runid:'31167000',id:'1001',state:'待提交',language:'G++14',size:544,time:'2024-07-18 14:45',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166999',id:'1157',state:'未通过',language:'G++14',size:283,time:'2024-07-18 14:45',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166998',id:'1003',state:'未通过',language:'G++14',size:155,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166997',id:'2046',state:'通过',language:'G++14',size:219,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166996',id:'1225',state:'未通过',language:'G++14',size:779,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166995',id:'2021',state:'通过',language:'G++14',size:191,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166994',id:'2071',state:'通过',language:'G++14',size:115,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166993',id:'1023',state:'未通过',language:'G++14',size:132,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166992',id:'1289',state:'通过',language:'G++14',size:348,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166991',id:'1131',state:'待提交',language:'G++14',size:261,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166990',id:'1204',state:'未通过',language:'G++14',size:240,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166989',id:'2061',state:'通过',language:'G++14',size:144,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166988',id:'1001',state:'通过',language:'G++14',size:131,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166987',id:'1001',state:'通过',language:'G++14',size:236,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166986',id:'1984',state:'未通过',language:'G++14',size:500,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166985',id:'1176',state:'未通过',language:'G++14',size:298,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166984',id:'1002',state:'通过',language:'G++14',size:106,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166983',id:'1036',state:'通过',language:'G++14',size:121,time:'2024-07-18 14:45',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166982',id:'1113',state:'通过',language:'G++14',size:544,time:'2024-07-18 14:45',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166981',id:'1157',state:'未通过',language:'G++14',size:283,time:'2024-07-18 14:45',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166980',id:'1001',state:'未通过',language:'G++14',size:155,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166979',id:'1002',state:'未通过',language:'G++14',size:219,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166978',id:'1225',state:'未通过',language:'G++14',size:779,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166977',id:'2021',state:'通过',language:'G++14',size:191,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166976',id:'2071',state:'通过',language:'G++14',size:115,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166975',id:'1023',state:'未通过',language:'G++14',size:132,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166974',id:'1289',state:'通过',language:'G++14',size:348,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166973',id:'1131',state:'未通过',language:'G++14',size:261,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166972',id:'1204',state:'未通过',language:'G++14',size:240,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166971',id:'2061',state:'通过',language:'G++14',size:144,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166970',id:'2054',state:'通过',language:'G++14',size:131,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166969',id:'1091',state:'通过',language:'G++14',size:236,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166968',id:'1984',state:'未通过',language:'G++14',size:500,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166967',id:'1176',state:'未通过',language:'G++14',size:298,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166966',id:'1023',state:'未通过',language:'G++14',size:132,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166965',id:'1289',state:'通过',language:'G++14',size:348,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166964',id:'1131',state:'未通过',language:'G++14',size:261,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166963',id:'1204',state:'未通过',language:'G++14',size:240,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166962',id:'2061',state:'通过',language:'G++14',size:144,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166961',id:'2054',state:'通过',language:'G++14',size:131,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166960',id:'1091',state:'通过',language:'G++14',size:236,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166959',id:'1984',state:'未通过',language:'G++14',size:500,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166958',id:'1176',state:'未通过',language:'G++14',size:298,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166957',id:'1007',state:'通过',language:'G++14',size:106,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166956',id:'1048',state:'编译错误',language:'G++14',size:290,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166955',id:'2021',state:'通过',language:'G++14',size:196,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166954',id:'2055',state:'未通过',language:'G++14',size:205,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166953',id:'1004',state:'通过',language:'G++14',size:176,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166952',id:'2029',state:'通过',language:'G++14',size:210,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166951',id:'1405',state:'编译错误',language:'G++14',size:388,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166950',id:'1069',state:'通过',language:'G++14',size:183,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166949',id:'1268',state:'编译错误',language:'G++14',size:527,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166948',id:'1131',state:'未通过',language:'G++14',size:261,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166947',id:'1204',state:'未通过',language:'G++14',size:240,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166946',id:'2061',state:'通过',language:'G++14',size:144,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166945',id:'2054',state:'通过',language:'G++14',size:131,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166944',id:'1091',state:'通过',language:'G++14',size:236,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166943',id:'1984',state:'未通过',language:'G++14',size:500,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166942',id:'1176',state:'未通过',language:'G++14',size:298,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166941',id:'1007',state:'通过',language:'G++14',size:106,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166940',id:'1048',state:'编译错误',language:'G++14',size:290,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166939',id:'2021',state:'通过',language:'G++14',size:196,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166938',id:'2055',state:'未通过',language:'G++14',size:205,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166937',id:'1004',state:'通过',language:'G++14',size:176,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166936',id:'2029',state:'通过',language:'G++14',size:210,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166935',id:'1405',state:'编译错误',language:'G++14',size:388,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166934',id:'1069',state:'通过',language:'G++14',size:183,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166933',id:'1268',state:'编译错误',language:'G++14',size:527,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166932',id:'1113',state:'通过',language:'G++14',size:216,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166931',id:'1006',state:'通过',language:'G++14',size:165,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166930',id:'1131',state:'未通过',language:'G++14',size:264,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166929',id:'1091',state:'通过',language:'G++14',size:236,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166928',id:'1984',state:'未通过',language:'G++14',size:500,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166927',id:'1176',state:'未通过',language:'G++14',size:298,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166926',id:'1007',state:'通过',language:'G++14',size:106,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166925',id:'1048',state:'编译错误',language:'G++14',size:290,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166924',id:'2021',state:'通过',language:'G++14',size:196,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166923',id:'2055',state:'未通过',language:'G++14',size:205,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166922',id:'1004',state:'通过',language:'G++14',size:176,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166921',id:'2029',state:'通过',language:'G++14',size:210,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166920',id:'1405',state:'编译错误',language:'G++14',size:388,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166919',id:'1069',state:'通过',language:'G++14',size:183,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166918',id:'1268',state:'编译错误',language:'G++14',size:527,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166917',id:'1113',state:'通过',language:'G++14',size:216,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166916',id:'1006',state:'通过',language:'G++14',size:165,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166915',id:'1131',state:'未通过',language:'G++14',size:264,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166914',id:'1408',state:'通过',language:'G++14',size:453,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166913',id:'2040',state:'通过',language:'G++14',size:193,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'zhangsan',runid:'31166912',id:'1086',state:'通过',language:'G++14',size:310,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+  {username:'admin',runid:'31166911',id:'1251',state:'编译错误',language:'G++14',size:931,time:'2024-07-18 14:44',programString:'我已经编写了一段程序'},
+    
+];
+
+const JobProps=[
+  {prop:'runid',label:'运行号'},
+  {prop:'id',label:'题号'},
+  {prop:'state',label:'状态'},
+  {prop:'language',label:'语言'},
+  {prop:'size',label:'代码长度(Bytes)'},
+  {prop:'time',label:'提交时间'},
+];
+
 // think 初始化时，获取等级选择器选项数组
 export const getOptions = (opt) => {
     return {
@@ -877,5 +979,77 @@ export const getQueryPageQuestions = (opt) => {
             tableData,
             total: findData.length
         }
+    }
+}
+const options_status = ["所有", "通过", "未通过", "编译错误", "待提交"];
+const languages = ['G++14', 'GCC', 'Java', 'Python', 'Pascal'];
+
+export const JobQueryPage = (opt) => {
+  let { username, id, states, currentPage, pageSize} = JSON.parse(opt.body);
+  console.log(JSON.parse(opt.body));
+
+  let res = Jobs;
+
+  if(!!username) {
+    res = Jobs.filter(el => el.username === username);
+  }
+
+  if(id !== undefined && id.length >= 1) {
+    res = res.filter(el => el.id === id);
+  }
+
+  if(states !== undefined) {
+    res = res.filter(el => states.includes(el.state));
+  }
+  let tableData = res.splice((currentPage - 1) * pageSize, pageSize);
+
+  return {
+    code: 200,
+    msg: '查询我的程序',
+    data: { total:res.length, tableData, tableProp: JobProps},
+  }
+}
+
+export const JobDeleteItem = (opt) => {
+    let { runids, username, id, states, currentPage, pageSize } = JSON.parse(opt.body);
+    console.log(runids);
+    console.log(username);
+    console.log(id);
+    console.log(states);
+    
+
+    // 第一步：删除数据
+    for(let k = 0; k < runids.length; k++) {
+        let index = -1;
+        for(let i = 0; i < Jobs.length; i++) {
+          if(Jobs[i].runid === runids[k]) {
+            index = i;
+            break;
+          }
+        } 
+      if(index >= 0) {
+        Jobs.splice(index, 1);
+      }
+    }
+
+    // 第二步返回更新的页面数据
+    let res = Jobs;
+    if(!!username) {
+      res = Jobs.filter(el => el.username === username);
+    }
+    
+    if(id !== undefined && id.length >= 1) {
+      res = res.filter(el => el.id === id);
+    } 
+    if(states !== undefined) {
+      res = res.filter(el => states.includes(el.state));
+    }
+    
+    let tableData = res.splice((currentPage - 1) * pageSize, pageSize);
+
+    return {
+        code: 200,
+        msg: '更新成功',
+        data: { total: res.length, tableData:tableData, tableProp: JobProps}
     }
 }
