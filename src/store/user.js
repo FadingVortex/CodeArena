@@ -1,4 +1,3 @@
-
 export default {
     namespaced: true,
     // 这些数据在网页刷新后就清空

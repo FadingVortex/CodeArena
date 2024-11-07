@@ -1,4 +1,3 @@
-// import Mock from "../../node_modules/mockjs"
 import Mock from "mockjs"
 import * as Login from "./mockLogin.js"
 import * as Think from "./mockThink.js"
