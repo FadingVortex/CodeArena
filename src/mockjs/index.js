@@ -9,7 +9,7 @@ Mock.setup({
 // get 用字符串就行
 // post 必须要用正则表达式
 // 以\ \括起的表达式，匹配一个单词
-Mock.mock(/\/login/, "post", (options) => Login.postlogin(options));
+// Mock.mock(/\/login/, "post", (options) => Login.postlogin(options));
 Mock.mock(/\/login/, "get", (options) => {
     return Login.getLogin(options);
 });

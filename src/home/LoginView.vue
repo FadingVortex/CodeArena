@@ -49,6 +49,7 @@
             // 在拦截响应器处已经去掉一层，故不再需要
             // let {data} = res;
             // let {data} = res.data
+            console.log(res);
             if(res.code === 200){
                 // 用户名和密码正确，跳转到系统首页
                 store.commit('User/setToken', res.data.token);

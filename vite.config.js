@@ -22,4 +22,13 @@ export default defineConfig({
   resolve: {
     alias: {'@': path.resolve(__dirname, './src'),},  
   },  
+  server: {
+    proxy: {
+      '/hello-mycross': {
+        target: 'http://localhost:8081', // 目标服务器
+        changeOrigin: true, // 是否改变源地址
+        rewrite: (path) => path.replace(/^\/hello-mycross/, ''),
+      }
+    }
+  },
 })

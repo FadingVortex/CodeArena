@@ -11,7 +11,7 @@ export const login = (data) => {
 
 export const register = (data) => {
     return instance({
-        url: '/login',
+        url: '/register',
         method: 'post',
         data
     })
