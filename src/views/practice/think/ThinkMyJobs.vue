@@ -139,37 +139,90 @@ const handleDelete = (row) => {
 
 </template>
 <style scoped>
-.page-container{
+.page-container {
     height: 100%;
     overflow: hidden;
-
-    /* background-color: beige; */
-    margin: 5px;
-
+    margin: 10px 20px; /* 增加左右边距 */
     display: flex;
     flex-direction: column;
+
+
     > .title-container {
-        height: 50px;
-        background-color: azure;
+        height: 60px;
+        background-color: #f8faff; /* 柔和的背景色 */
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        align-items: center;
+        justify-content: center; /* 标题居中 */
+        padding: 0 20px;
+        font-size: 20px; /* 加大字体 */
+        font-weight: bold;
+        color: #333; /* 深灰色字体 */
         border-radius: 10px 10px 0 0;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
     }
+
     > .toolbar-container {
-        height: 40px;
-        background-color: beige;
-        /* margin: 5px 10px 5px 20px; */
-        padding: 5px 0 0 0;
+        height: auto; /* 自动适应内容高度 */
+        background-color: #f9f9f9; /* 柔和背景 */
+        padding: 10px 20px;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-start; /* 修改这一行 */
+        gap: 15px; /* 控制表单项之间的间距 */
+        border-bottom: 1px solid #e0e0e0; /* 添加底部边框 */
     }
+
+    .el-form {
+        .el-input,
+        .el-select,
+        .el-button {
+            height: 35px; /* 统一高度 */
+            line-height: 40px;
+            border-radius: 5px; /* 添加圆角 */
+        }
+    }
+
+
+    .el-form-item {
+        margin: 5px;
+    }
+
+    .el-button {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        border: none;
+        transition: all 0.3s;
+    }
+    .el-button:hover {
+        background-color: #0056b3; /* 鼠标悬浮变深 */
+        color: #fff;
+    }
+
     > .content-container {
         flex: 1;
         overflow: auto;
-        background-color: azure;
+        background-color: #f8f9fb; /* 柔和背景色 */
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
     }
+    .el-table {
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 添加表格阴影 */
+    }
+    .el-table .el-table__row:nth-child(odd) {
+        background-color: #f9f9f9; /* 奇数行背景 */
+    }
+    .el-table .el-table__row:nth-child(even) {
+        background-color: white; /* 偶数行背景 */
+    }
+    .el-pagination {
+        margin: 10px 0;
+        text-align: center;
+    }
+
 }
 
 </style>

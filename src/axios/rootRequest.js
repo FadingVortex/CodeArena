@@ -1,4 +1,9 @@
+/**
+ * 处理来自LoginView页面的请求
+ */
+
 import instance from '@/axios/instance.js'
+
 
 export const login = (data) => {
     return instance({
@@ -16,8 +21,3 @@ export const register = (data) => {
         data
     })
 }
-
-// import axios from 'axios'
-// export const login1 = (data) => {
-//     return (axios.post('/login',data));
-// }

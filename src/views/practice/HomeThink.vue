@@ -120,9 +120,6 @@ const freshPageData = () => {
 }
 
 const handelQuery = () => {
-    // if(form.value.chapter !== '') requestQueryQuestions(form.value.chapter);
-    // else if(form.value.module !== '') requestQueryQuestions(form.value.module);
-    // else if(form.value.level !== '') requestQueryQuestions(form.value.level);
     freshPageData();
 }
 
@@ -225,36 +222,55 @@ const LMC = computed(() => {
 
 </template>
 <style scoped>
-.page-container{
+.page-container {
     height: 100%;
     overflow: hidden;
 
-    /* background-color: beige; */
+    /* 背景和间距 */
     margin: 5px;
-
     display: flex;
     flex-direction: column;
+
+    /* 子元素样式 */
     > .title-container {
-        height: 50px;
-        background-color: azure;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        border-radius: 10px 10px 0 0;
-    }
-    > .toolbar-container {
-        height: 40px;
-        background-color: beige;
-        /* margin: 5px 10px 5px 20px; */
-        padding: 5px 0 0 0;
-        display: flex;
-        flex-direction: row;
         justify-content: center;
+        align-items: center;
+        padding: 10px 0;
     }
+
+    > .toolbar-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px; /* 添加统一的间距 */
+        padding: 10px 20px;
+        background-color: #f8f9fb; /* 柔和的背景色 */
+        border-radius: 8px;
+    }
+    .el-form-item {
+        margin: 3px;
+    }
+
+    > .el-button {
+        height: 40px; /* 与表单对齐 */
+        border-radius: 8px;
+    }
+
     > .content-container {
         flex: 1;
         overflow: auto;
-        background-color: azure;
+        background-color: #ffffff; /* 白色背景 */
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .el-table .el-table__empty-block {
+        background-color: transparent; /* 与背景统一 */
+        color: #888; /* 提示信息变为灰色 */
     }
 }
 </style>

@@ -42,21 +42,10 @@
         // config 内部包含params变量,通常会自动加入到url中        
         // let {username} = usr
         // 将usr中的username变量提取出来
-
-        // axios.post ("/login", params)
         login(params)
         .then((res) => {
-            // 在拦截响应器处已经去掉一层，故不再需要
-            // let {data} = res;
-            // let {data} = res.data
             console.log(res);
             if(res.code === 200){
-                // let payload = {
-                //     token: res.data.token,
-                //     username: res.data.username,
-                // }
-                // store.commit('User/setToken', payload);
-
 
                 // 用户名和密码正确，跳转到系统首页
                 store.commit('User/setToken', res.data.token);

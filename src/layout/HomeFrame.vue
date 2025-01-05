@@ -33,28 +33,63 @@ import LayoutHeader from './LayoutHeader.vue';
 }
 .home > header {
     height: 50px;
-    background-color: bisque;
+    background-color: #1a73e8; /* 深蓝色，替换原 bisque */
     margin: 5px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
 }
 .home > main {
     flex: 1;
     overflow: hidden;
     margin: 5px;
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff; /* 保持白色背景 */
     display: flex;
+
+    /* 子元素样式 */
     > .menu {
+        width: 200px; /* 固定宽度 */
         height: 100%;
         overflow: auto;
-        background-color: rgb(251, 254, 251);
+        background-color: #f4f6f8; /* 替换为浅灰 */
         margin: 0 5px 0 0;
+        border-radius: 8px;
+        padding: 10px;
     }
     > .client {
         flex: 1;
         /* overflow: auto; */
         overflow: hidden;
-        /* background-color: rgb(186, 236, 183); */
-        border: 5px solid rgb(186, 236, 183);
+        border: 2px solid #e3e7eb;
         border-radius: 10px;
+        padding: 10px;
     }
 }
+
+.menu {
+    height: 100%;
+    overflow: auto;
+    background-color: #f7f8fa; /* 提升导航背景为更浅的灰 */
+    border-right: 1px solid #e0e0e0; /* 添加分隔线 */
+    padding: 10px 0;
+}
+.menu-item {
+    padding: 10px 20px;
+    color: #333;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.menu-item:hover {
+    background-color: #e0f3ff; /* 鼠标悬浮高亮 */
+}
+.menu-item.active {
+    background-color: #d0e7ff; /* 当前选中项背景 */
+    font-weight: bold;
+}
+
+
 </style>

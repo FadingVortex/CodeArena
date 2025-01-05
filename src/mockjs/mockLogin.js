@@ -1,3 +1,8 @@
+/**
+ * 处理拦截Login请求后执行的相关函数
+ */
+
+
 const users = [
     {
         username: 'John',
