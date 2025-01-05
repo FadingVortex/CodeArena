@@ -16,10 +16,11 @@ const chapters = ref([]);
 // 表格的数据
 const tableData = ref([]);
 
-
+// HomeThink.vue 初始化数据，从后端提取数据
 onMounted(() => {
     // 使用axios或instance，从后端提取数据
     options().then((res) => {
+        console.log(res);
         if(res.code === 200) {
             levels.value = [...res.data.options];
         }

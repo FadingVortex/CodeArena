@@ -1,63 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LoginView from '../home/LoginView.vue';
 import store from '@/store/index.js';
+import routes from './routerInfomation.js'
 
-const childrenHomeFrame = [
-    {
-        path: '/course/think/home',
-        component: () => import('@/views/practice/think/ThinkFrame.vue'),
-        name: 'ThinkFrame',
-        mata: { requireAuth: true },
-    },
-    {
-        path: '/course/hard/home',
-        component: () => import('@/views/practice/HomeHard.vue'),
-        name: 'HomeHard',
-        mata: { requireAuth: true },
-    },
-    {
-        path: '/course/soft/home',
-        component: () => import('@/views/practice/HomeSoft.vue'),
-        name: 'HomeSoft',
-        mata: { requireAuth: true },
-    },
-    {
-        path: '/test',
-        component: () => import('@/views/Test.vue'),
-        name: 'Test',
-        meta: { requireAuth: true },
-    },
-];
-
-const routes = [
-    {
-        path: '/login',
-        // 常态地导入
-        component: LoginView,
-        name: 'LoginView',
-        meta: {
-            requireAuth: true,
-            myname: 'hello',
-        },
-    },
-    {
-        path: '/',
-        // 动态地导入
-        component: () => import('@/layout/HomeFrame.vue'),
-        name: 'HomeFrame',
-        meta: {
-            requireAuth: true,
-        },
-        children: childrenHomeFrame,
-    },
-    {
-        path: '/register',
-        component: () => import('@/home/registerView.vue'),
-        meta: {
-            requireAuth: false,
-        },
-    },
-];
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),

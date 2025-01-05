@@ -13,9 +13,10 @@ import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   plugins: [
     vue(),
+    // 配置自动导入插件
     AutoImport({
-      imports: ['vue', 'vue-router', 'vuex'],
-      resolvers:[ElementPlusResolver()]
+      imports: ['vue', 'vue-router', 'vuex'], // 自动导入vue和vue-router相关函数
+      resolvers:[ElementPlusResolver()]       // 指定要使用的组件解析器
     }),
     Components({resolvers:[ElementPlusResolver()]})   
   ],

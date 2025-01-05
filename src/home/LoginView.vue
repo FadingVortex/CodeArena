@@ -51,6 +51,13 @@
             // let {data} = res.data
             console.log(res);
             if(res.code === 200){
+                // let payload = {
+                //     token: res.data.token,
+                //     username: res.data.username,
+                // }
+                // store.commit('User/setToken', payload);
+
+
                 // 用户名和密码正确，跳转到系统首页
                 store.commit('User/setToken', res.data.token);
                 store.commit('User/setUserName', res.data.username);
@@ -66,6 +73,7 @@
             console.log("axios.catch===>");
             console.log(err);
         });
+
         // 与后台通信
         // 得到结果
         // 分析结果
@@ -108,7 +116,7 @@
             </el-form-item>
         </el-form>
     </div>
-</template>0
+</template>
 
 <style scoped>
 .login-avatar > img {
