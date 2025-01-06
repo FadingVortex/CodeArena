@@ -1,8 +1,6 @@
 <script setup>
-
 import LayoutMenu from './LayoutMenu.vue'
 import LayoutHeader from './LayoutHeader.vue';
-
 </script>
 
 <template>
@@ -21,19 +19,119 @@ import LayoutHeader from './LayoutHeader.vue';
     </div>
 </template>
 
-
 <style lang="css" scoped>
 .home {
     height: 100%;
-    /* 不带滚动条，溢出的话自动隐藏 */
     overflow: hidden;
-
     display: flex;
     flex-direction: column; 
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
 }
+
 .home > header {
     height: 50px;
-    background-color: #1a73e8; /* 深蓝色，替换原 bisque */
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    margin: 5px;
+    border-radius: 8px;
+    color: white; /* 文字颜色保持白色 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.home > main {
+    flex: 1;
+    overflow: hidden;
+    margin: 5px;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+}
+
+.home > main > .menu {
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.home > main > .client {
+    flex: 1;
+    overflow: hidden;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--morand-border); /* 使用全局边框颜色 */
+}
+
+.menu {
+    height: 100%;
+    overflow: auto;
+    padding: 10px 0;
+}
+
+.menu-item {
+    padding: 10px 20px;
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-radius: 6px;
+    margin: 4px 0;
+}
+
+.menu-item:hover {
+    background-color: var(--morand-secondary); /* 使用全局次要色调 */
+    color: white; /* 文字颜色保持白色 */
+}
+
+.menu-item.active {
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    color: white; /* 文字颜色保持白色 */
+    font-weight: bold;
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--morand-bg-light); /* 使用全局背景色 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--morand-secondary); /* 使用全局次要色调 */
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--morand-primary); /* 使用全局主色调 */
+}
+</style>
+
+
+
+<!-- <style lang="css" scoped>
+.home {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    background-color: #F3F4F6;
+}
+
+.home > header {
+    height: 50px;
+    background-color: #849B9F;
     margin: 5px;
     border-radius: 8px;
     color: white;
@@ -42,54 +140,82 @@ import LayoutHeader from './LayoutHeader.vue';
     justify-content: center;
     font-size: 18px;
     font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .home > main {
     flex: 1;
     overflow: hidden;
     margin: 5px;
-    background-color: #ffffff; /* 保持白色背景 */
+    background-color: #F3F4F6;
     display: flex;
+    gap: 10px;
+    padding: 5px;
+}
 
-    /* 子元素样式 */
-    > .menu {
-        width: 200px; /* 固定宽度 */
-        height: 100%;
-        overflow: auto;
-        background-color: #f4f6f8; /* 替换为浅灰 */
-        margin: 0 5px 0 0;
-        border-radius: 8px;
-        padding: 10px;
-    }
-    > .client {
-        flex: 1;
-        /* overflow: auto; */
-        overflow: hidden;
-        border: 2px solid #e3e7eb;
-        border-radius: 10px;
-        padding: 10px;
-    }
+.home > main > .menu {
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    background-color: #E8E9E4;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.home > main > .client {
+    flex: 1;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #D1D5DB;
 }
 
 .menu {
     height: 100%;
     overflow: auto;
-    background-color: #f7f8fa; /* 提升导航背景为更浅的灰 */
-    border-right: 1px solid #e0e0e0; /* 添加分隔线 */
     padding: 10px 0;
 }
+
 .menu-item {
     padding: 10px 20px;
-    color: #333;
+    color: #4A4E4D;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    border-radius: 6px;
+    margin: 4px 0;
 }
+
 .menu-item:hover {
-    background-color: #e0f3ff; /* 鼠标悬浮高亮 */
+    background-color: #C4C4BC;
+    color: #FFFFFF;
 }
+
 .menu-item.active {
-    background-color: #d0e7ff; /* 当前选中项背景 */
+    background-color: #849B9F;
+    color: #FFFFFF;
     font-weight: bold;
 }
 
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+}
 
-</style>
+::-webkit-scrollbar-track {
+    background: #F3F4F6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #C4C4BC;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #849B9F;
+}
+</style> -->
+
+

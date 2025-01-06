@@ -1,0 +1,112 @@
+/* 莫兰迪配色主题 */
+:root {
+    /* 主色调 */
+    --morand-primary: #849B9F;     /* 灰绿色调 - 主要强调色 */
+    --morand-secondary: #C4C4BC;   /* 灰褐色调 - 次要强调色 */
+    
+    /* 背景色系 */
+    --morand-bg-light: #F3F4F6;    /* 浅灰白 - 主背景 */
+    --morand-bg-medium: #E8E9E4;   /* 中灰白 - 次级背景 */
+    --morand-bg-dark: #D5D5D3;     /* 深灰白 - 卡片背景 */
+    
+    /* 文字色系 */
+    --morand-text-primary: #4A4E4D;  /* 主要文字 */
+    --morand-text-secondary: #707070; /* 次要文字 */
+    
+    /* 边框和分割线 */
+    --morand-border: #D1D5DB;
+    
+    /* 功能色 */
+    --morand-success: #97A38F;     /* 绿灰 - 成功 */
+    --morand-warning: #D6C1B0;     /* 褐灰 - 警告 */
+    --morand-danger: #C7B8B8;      /* 红灰 - 危险 */
+  }
+  
+/* HomeFrame.vue 样式修改 */
+.home > header {
+background-color: var(--morand-primary);
+color: white;
+}
+
+.home > main > .menu {
+background-color: var(--morand-bg-light);
+border-right: 1px solid var(--morand-border);
+}
+
+.home > main > .client {
+background-color: var(--morand-bg-light);
+border: 1px solid var(--morand-border);
+}
+
+/* HomeThink.vue 和 ThinkMyJobs.vue 共用样式 */
+.page-container {
+background-color: var(--morand-bg-light);
+}
+
+.title-container {
+background-color: var(--morand-bg-medium);
+color: var(--morand-text-primary);
+}
+
+.toolbar-container {
+background-color: var(--morand-bg-medium);
+}
+
+/* 按钮样式 */
+.el-button--primary {
+background-color: var(--morand-primary);
+border-color: var(--morand-primary);
+}
+
+.el-button--primary:hover {
+background-color: var(--morand-secondary);
+border-color: var(--morand-secondary);
+}
+
+.el-button--danger {
+background-color: var(--morand-danger);
+border-color: var(--morand-danger);
+}
+
+/* 表格样式 */
+.el-table {
+background-color: var(--morand-bg-light);
+border: 1px solid var(--morand-border);
+}
+
+.el-table th {
+background-color: var(--morand-bg-medium);
+color: var(--morand-text-primary);
+}
+
+.el-table td {
+color: var(--morand-text-secondary);
+}
+
+.el-table--striped .el-table__row:nth-child(odd) {
+background-color: var(--morand-bg-light);
+}
+
+.el-table--striped .el-table__row:nth-child(even) {
+background-color: var(--morand-bg-medium);
+}
+
+/* 分页器样式 */
+.el-pagination {
+color: var(--morand-text-secondary);
+}
+
+.el-pagination .el-pagination__total {
+color: var(--morand-text-secondary);
+}
+
+/* 表单元素样式 */
+.el-input__inner {
+border-color: var(--morand-border);
+background-color: var(--morand-bg-light);
+}
+
+.el-select .el-input__inner:focus {
+border-color: var(--morand-primary);
+}
+

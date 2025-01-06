@@ -1,0 +1,102 @@
+:root {
+    --morand-primary: #DAC4B5;    /* 杏粉色 - 主色 */
+    --morand-secondary: #BFB5A9;  /* 灰褐色 - 辅色 */
+    --morand-accent: #E6D1C9;     /* 浅粉色 - 强调 */
+    --morand-bg-light: #F5F0EC;   /* 米白色 - 背景 */
+    --morand-bg-medium: #E2D9D3;  /* 浅棕色 - 次级背景 */
+    --morand-text-primary: #5C524D; /* 深棕色 - 文字 */
+    --morand-text-secondary: #7A6F6A; /* 中棕色 - 次文字 */
+    --morand-border: #E2D9D3;     /* 浅棕色 - 边框 */
+    --morand-success: #A3B5AE;    /* 薄荷绿 - 成功 */
+    --morand-warning: #D6C1B0;    /* 褐灰 - 警告 */
+    --morand-danger: #C7B8B8;     /* 红灰 - 危险 */
+  }
+
+
+/* HomeFrame.vue 样式修改 */
+.home > header {
+    background-color: var(--morand-primary);
+    color: white;
+    }
+    
+    .home > main > .menu {
+    background-color: var(--morand-bg-light);
+    border-right: 1px solid var(--morand-border);
+    }
+    
+    .home > main > .client {
+    background-color: var(--morand-bg-light);
+    border: 1px solid var(--morand-border);
+    }
+    
+    /* HomeThink.vue 和 ThinkMyJobs.vue 共用样式 */
+    .page-container {
+    background-color: var(--morand-bg-light);
+    }
+    
+    .title-container {
+    background-color: var(--morand-bg-medium);
+    color: var(--morand-text-primary);
+    }
+    
+    .toolbar-container {
+    background-color: var(--morand-bg-medium);
+    }
+    
+    /* 按钮样式 */
+    .el-button--primary {
+    background-color: var(--morand-primary);
+    border-color: var(--morand-primary);
+    }
+    
+    .el-button--primary:hover {
+    background-color: var(--morand-secondary);
+    border-color: var(--morand-secondary);
+    }
+    
+    .el-button--danger {
+    background-color: var(--morand-danger);
+    border-color: var(--morand-danger);
+    }
+    
+    /* 表格样式 */
+    .el-table {
+    background-color: var(--morand-bg-light);
+    border: 1px solid var(--morand-border);
+    }
+    
+    .el-table th {
+    background-color: var(--morand-bg-medium);
+    color: var(--morand-text-primary);
+    }
+    
+    .el-table td {
+    color: var(--morand-text-secondary);
+    }
+    
+    .el-table--striped .el-table__row:nth-child(odd) {
+    background-color: var(--morand-bg-light);
+    }
+    
+    .el-table--striped .el-table__row:nth-child(even) {
+    background-color: var(--morand-bg-medium);
+    }
+    
+    /* 分页器样式 */
+    .el-pagination {
+    color: var(--morand-text-secondary);
+    }
+    
+    .el-pagination .el-pagination__total {
+    color: var(--morand-text-secondary);
+    }
+    
+    /* 表单元素样式 */
+    .el-input__inner {
+    border-color: var(--morand-border);
+    background-color: var(--morand-bg-light);
+    }
+    
+    .el-select .el-input__inner:focus {
+    border-color: var(--morand-primary);
+    }

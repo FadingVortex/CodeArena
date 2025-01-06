@@ -2,6 +2,7 @@
 import { computed, onMounted } from 'vue';
 import { options, deleteQueryQuestions, queryQuestionByPage} from '@/axios/thinkRequest'
 import { changeCurrent } from './think/ThinkData';
+import { queryQuestion } from '../../axios/thinkRequest';
 
 // 定义select的已选中的标签
 const form = ref({
@@ -120,7 +121,15 @@ const freshPageData = () => {
 }
 
 const handelQuery = () => {
-    freshPageData();
+    // freshPageData();
+
+    queryQuestion(LMC.value).then(res => {
+        console.log(res);
+        tableData.value = res.data.tableData;
+    }).catch(err => {
+
+    });
+
 }
 
 const handleEdit = (row, column, index, store) => {
@@ -225,52 +234,129 @@ const LMC = computed(() => {
 .page-container {
     height: 100%;
     overflow: hidden;
-
-    /* 背景和间距 */
     margin: 5px;
     display: flex;
     flex-direction: column;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border-radius: 8px;
+}
 
-    /* 子元素样式 */
-    > .title-container {
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 0;
-    }
+.title-container {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+    border-radius: 8px 8px 0 0;
+}
 
-    > .toolbar-container {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 15px; /* 添加统一的间距 */
-        padding: 10px 20px;
-        background-color: #f8f9fb; /* 柔和的背景色 */
-        border-radius: 8px;
-    }
-    .el-form-item {
-        margin: 3px;
-    }
+.toolbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 15px 20px;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border-bottom: 1px solid var(--morand-border); /* 使用全局边框颜色 */
+}
 
-    > .el-button {
-        height: 40px; /* 与表单对齐 */
-        border-radius: 8px;
-    }
+.el-form-item {
+    margin: 3px;
+}
 
-    > .content-container {
-        flex: 1;
-        overflow: auto;
-        background-color: #ffffff; /* 白色背景 */
-        border-radius: 8px;
-        padding: 10px;
-    }
+:deep(.el-button) {
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    border-color: var(--morand-primary); /* 使用全局主色调 */
+    color: white; /* 文字颜色保持白色 */
+    transition: all 0.3s ease;
+}
 
-    .el-table .el-table__empty-block {
-        background-color: transparent; /* 与背景统一 */
-        color: #888; /* 提示信息变为灰色 */
-    }
+:deep(.el-button:hover) {
+    background-color: var(--morand-secondary); /* 使用全局次要色调 */
+    border-color: var(--morand-secondary); /* 使用全局次要色调 */
+}
+
+:deep(.el-button--danger) {
+    background-color: var(--morand-danger); /* 使用全局危险色调 */
+    border-color: var(--morand-danger); /* 使用全局危险色调 */
+}
+
+:deep(.el-button--danger:hover) {
+    background-color: var(--morand-warning); /* 使用全局警告色调 */
+    border-color: var(--morand-warning); /* 使用全局警告色调 */
+}
+
+.content-container {
+    flex: 1;
+    overflow: auto;
+    padding: 15px;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+}
+
+:deep(.el-table) {
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border-radius: 8px;
+}
+
+:deep(.el-table th) {
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+}
+
+:deep(.el-table--striped .el-table__row:nth-child(odd)) {
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+}
+
+:deep(.el-pagination) {
+    margin: 15px 0;
+    text-align: center;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* 分页器按钮样式 */
+:deep(.el-pagination .btn-prev),
+:deep(.el-pagination .btn-next),
+:deep(.el-pagination .number:not(.active)) {
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border: 1px solid var(--morand-border); /* 使用全局边框颜色 */
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+    transition: all 0.3s;
+}
+
+:deep(.el-pagination .btn-prev:hover),
+:deep(.el-pagination .btn-next:hover),
+:deep(.el-pagination .number:not(.active):hover) {
+    background-color: var(--morand-secondary); /* 使用全局次要色调 */
+    color: white; /* 文字颜色保持白色 */
+}
+
+/* 覆盖 Element Plus 默认的选中按钮样式 */
+:deep(.el-pagination.is-background .btn-next.is-active),
+:deep(.el-pagination.is-background .btn-prev.is-active),
+:deep(.el-pagination.is-background .el-pager li.is-active) {
+    background-color: var(--morand-primary) !important; /* 使用全局主色调 */
+    color: white !important; /* 文字颜色保持白色 */
+}
+
+:deep(.el-pagination.is-background .btn-next.is-active:hover),
+:deep(.el-pagination.is-background .btn-prev.is-active:hover),
+:deep(.el-pagination.is-background .el-pager li.is-active:hover) {
+    background-color: var(--morand-primary) !important; /* 使用全局主色调 */
+    color: white !important; /* 文字颜色保持白色 */
+}
+
+:deep(.el-select-dropdown__item.selected) {
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    color: white; /* 文字颜色保持白色 */
+}
+
+:deep(.el-select-dropdown__item:hover) {
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
 }
 </style>
+

@@ -969,8 +969,8 @@ export const getQueryPageQuestions = (opt) => {
     }
 
     // splice 会返回被删除的数组
-    let tableData = findData.splice((currentPage - 1)*pageSize, pageSize);
-    // let tableData = findData.slice((currentPage - 1)*pageSize, pageSize);
+    // let tableData = findData.splice((currentPage - 1)*pageSize, pageSize);
+    let tableData = findData.slice((currentPage - 1)*pageSize, pageSize);
     
     return {
         code: 200,
@@ -1001,7 +1001,8 @@ export const JobQueryPage = (opt) => {
   if(states !== undefined) {
     res = res.filter(el => states.includes(el.state));
   }
-  let tableData = res.splice((currentPage - 1) * pageSize, pageSize);
+  // let tableData = res.splice((currentPage - 1) * pageSize, pageSize);
+  let tableData = findData.slice((currentPage - 1)*pageSize, pageSize);
 
   return {
     code: 200,

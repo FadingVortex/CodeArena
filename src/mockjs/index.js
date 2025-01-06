@@ -20,7 +20,7 @@ Mock.mock(/\/register/, "post", (options) => {
 // Mock.mock(/\/think\/options/, "get", (options) => Think.getOptions(options));   // HomeThink.vue 初始化数据
 
 
-Mock.mock(/\/think\/query\/questions/, 'get', (options) => Think.getQueryQuestions(options));
+// Mock.mock(/\/think\/query\/questions/, 'get', (options) => Think.getQueryQuestions(options));
 
 Mock.mock(/\/think\/delete\/questions/, 'post', (options) => Think.deleteQuestions(options));
 

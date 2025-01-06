@@ -138,91 +138,249 @@ const handleDelete = (row) => {
 </div>
 
 </template>
+
+
+<!-- <style scoped>
+.page-container {
+    height: 100%;
+    overflow: hidden;
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border-radius: 8px;
+}
+
+.title-container {
+    height: 60px;
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+    border-radius: 10px 10px 0 0;
+}
+
+.toolbar-container {
+    height: auto;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 15px;
+    border-bottom: 1px solid var(--morand-border); /* 使用全局边框颜色 */
+}
+
+:deep(.el-form) {
+    .el-input,
+    .el-select,
+    .el-button {
+        height: 35px;
+        line-height: 35px;
+        border-radius: 6px;
+    }
+
+    .el-input__inner {
+        border-color: var(--morand-border); /* 使用全局边框颜色 */
+    }
+
+    .el-input__inner:focus {
+        border-color: var(--morand-primary); /* 使用全局主色调 */
+    }
+}
+
+.el-form-item {
+    margin: 5px;
+}
+
+:deep(.el-button) {
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    color: white; /* 文字颜色保持白色 */
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s;
+}
+
+:deep(.el-button:hover) {
+    background-color: var(--morand-secondary); /* 使用全局次要色调 */
+}
+
+.content-container {
+    flex: 1;
+    overflow: auto;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+}
+
+:deep(.el-table) {
+    border-radius: 8px;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+:deep(.el-table .el-table__row:nth-child(odd)) {
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+}
+
+:deep(.el-pagination) {
+    margin: 15px 0;
+    text-align: center;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+:deep(.el-select-dropdown__item.selected) {
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    color: white; /* 文字颜色保持白色 */
+}
+
+:deep(.el-select-dropdown__item:hover) {
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+}
+</style> -->
+
+
 <style scoped>
 .page-container {
     height: 100%;
     overflow: hidden;
-    margin: 10px 20px; /* 增加左右边距 */
+    margin: 10px 20px;
     display: flex;
     flex-direction: column;
-
-
-    > .title-container {
-        height: 60px;
-        background-color: #f8faff; /* 柔和的背景色 */
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center; /* 标题居中 */
-        padding: 0 20px;
-        font-size: 20px; /* 加大字体 */
-        font-weight: bold;
-        color: #333; /* 深灰色字体 */
-        border-radius: 10px 10px 0 0;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-    }
-
-    > .toolbar-container {
-        height: auto; /* 自动适应内容高度 */
-        background-color: #f9f9f9; /* 柔和背景 */
-        padding: 10px 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start; /* 修改这一行 */
-        gap: 15px; /* 控制表单项之间的间距 */
-        border-bottom: 1px solid #e0e0e0; /* 添加底部边框 */
-    }
-
-    .el-form {
-        .el-input,
-        .el-select,
-        .el-button {
-            height: 35px; /* 统一高度 */
-            line-height: 40px;
-            border-radius: 5px; /* 添加圆角 */
-        }
-    }
-
-
-    .el-form-item {
-        margin: 5px;
-    }
-
-    .el-button {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-        border: none;
-        transition: all 0.3s;
-    }
-    .el-button:hover {
-        background-color: #0056b3; /* 鼠标悬浮变深 */
-        color: #fff;
-    }
-
-    > .content-container {
-        flex: 1;
-        overflow: auto;
-        background-color: #f8f9fb; /* 柔和背景色 */
-        padding: 10px;
-        border-radius: 0 0 10px 10px;
-    }
-    .el-table {
-        border-radius: 5px;
-        background-color: white;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 添加表格阴影 */
-    }
-    .el-table .el-table__row:nth-child(odd) {
-        background-color: #f9f9f9; /* 奇数行背景 */
-    }
-    .el-table .el-table__row:nth-child(even) {
-        background-color: white; /* 偶数行背景 */
-    }
-    .el-pagination {
-        margin: 10px 0;
-        text-align: center;
-    }
-
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border-radius: 8px;
 }
 
+.title-container {
+    height: 60px;
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+    border-radius: 10px 10px 0 0;
+}
+
+.toolbar-container {
+    height: auto;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 15px;
+    border-bottom: 1px solid var(--morand-border); /* 使用全局边框颜色 */
+}
+
+:deep(.el-form) {
+    .el-input,
+    .el-select,
+    .el-button {
+        height: 35px;
+        line-height: 35px;
+        border-radius: 6px;
+    }
+
+    .el-input__inner {
+        /* border-color: var(--morand-border); /* 使用全局边框颜色 */
+    }
+
+    .el-input__inner:focus {
+        border-color: var(--morand-primary); /* 使用全局主色调 */
+    }
+}
+
+.el-form-item {
+    margin: 5px;
+}
+
+:deep(.el-button) {
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    color: white; /* 文字颜色保持白色 */
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s;
+}
+
+:deep(.el-button:hover) {
+    background-color: var(--morand-secondary); /* 使用全局次要色调 */
+}
+
+.content-container {
+    flex: 1;
+    overflow: auto;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+}
+
+:deep(.el-table) {
+    border-radius: 8px;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+:deep(.el-table .el-table__row:nth-child(odd)) {
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+}
+
+:deep(.el-pagination) {
+    margin: 15px 0;
+    text-align: center;
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* 分页器按钮样式 */
+:deep(.el-pagination .btn-prev),
+:deep(.el-pagination .btn-next),
+:deep(.el-pagination .number:not(.active)) {
+    background-color: var(--morand-bg-light); /* 使用全局背景色 */
+    border: 1px solid var(--morand-border); /* 使用全局边框颜色 */
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+    transition: all 0.3s;
+}
+
+:deep(.el-pagination .btn-prev:hover),
+:deep(.el-pagination .btn-next:hover),
+:deep(.el-pagination .number:not(.active):hover) {
+    background-color: var(--morand-secondary); /* 使用全局次要色调 */
+    color: white; /* 文字颜色保持白色 */
+}
+
+/* 覆盖 Element Plus 默认的选中按钮样式 */
+:deep(.el-pagination.is-background .btn-next.is-active),
+:deep(.el-pagination.is-background .btn-prev.is-active),
+:deep(.el-pagination.is-background .el-pager li.is-active) {
+    background-color: var(--morand-primary) !important; /* 使用全局主色调 */
+    color: white !important; /* 文字颜色保持白色 */
+}
+
+:deep(.el-pagination.is-background .btn-next.is-active:hover),
+:deep(.el-pagination.is-background .btn-prev.is-active:hover),
+:deep(.el-pagination.is-background .el-pager li.is-active:hover) {
+    background-color: var(--morand-primary) !important; /* 使用全局主色调 */
+    color: white !important; /* 文字颜色保持白色 */
+}
+
+:deep(.el-select-dropdown__item.selected) {
+    background-color: var(--morand-primary); /* 使用全局主色调 */
+    color: white; /* 文字颜色保持白色 */
+}
+
+:deep(.el-select-dropdown__item:hover) {
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+}
 </style>
