@@ -30,6 +30,10 @@ watch(selectedTheme, (newTheme) => {
 // 组件挂载时加载默认主题
 onMounted(async () => {
   try {
+    const savedTheme = localStorage.getItem('selectedTheme');
+    if(savedTheme) {
+      selectedTheme.value = savedTheme;
+    }
     await proxy.$switchTheme(selectedTheme.value); // 加载默认主题
     console.log(`Default theme loaded: ${selectedTheme.value}`);
   } catch (error) {
@@ -43,6 +47,7 @@ const handleThemeChange = async (themeName) => {
     console.log(`Switching to theme: ${themeName}`);
     await proxy.$switchTheme(themeName); // 调用全局方法
     console.log(`Theme switched to: ${themeName}`);
+    localStorage.setItem('selectedTheme', themeName);
   } catch (error) {
     console.error(error);
   }
@@ -73,6 +78,12 @@ const handleThemeChange = async (themeName) => {
 
 .select-container {
   margin-left: auto; /* 将选择框推到最右边 */
+  padding: 4px;
+}
+
+/* :deep 和 ::v-deep 可以影响动态生成的组件，style加上scoped后自动只适用于静态的DOM组件 */ 
+::v-deep(.el-select__wrapper) {
+  gap: 0px;
 }
 
 </style>

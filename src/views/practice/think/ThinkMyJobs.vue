@@ -4,8 +4,16 @@ import { queryJobs, ThinkJobDelete } from '@/axios/thinkRequest';
 
 
 const tableData = ref([]);
-const tableProp = ref([]);
 const store = useStore();
+const form = ref([]);
+const tableProp = ref([
+    {prop: 'runid', label: '运行号'},
+    {prop: 'id', label: '题号'},
+    {prop: 'state', label: '状态'},
+    {prop: 'language', label: '语言'},
+    {prop: 'size', label: '代码长度(Bytes)'},
+    {prop: 'time', label: '提交时间'}
+]);
 
 
 const filters = ref({
@@ -26,13 +34,17 @@ const handleQuery = () => {
     // 根据查询条件获取查询内容
     // 查询条件，题号，状态数组，将来用in
     let data = {
-        username: store.getters["User/getUsername"],
+        username: store.getters['User/getUserName'],
         id: filters.value.id,
         state: filters.value.state,
-        states: filters.value.state === '全部' ? options_status : [filters.value.state],
+        // states: filters.value.state === '全部' ? options_status : [filters.value.state],
         pageSize: page.value.pageSize,
         currentPage: page.value.currentPage
     }
+    if(filters.value.state !== '' && filters.value.state !== undefined) {
+        data['states'] = filters.value.state === '全部' ? options_status : [filters.value.state];
+    }
+
     // 异步执行，当有返回时执行then
     console.log(data);
     console.log("handleQuery");
@@ -66,11 +78,10 @@ const handleDelete = (row) => {
     // 用户确定删除
     let data = {
         runids: [row.runid],
-        username: store.getters["User/getUsername"],
+        username: store.getters["User/getUserName"],
         id: filters.value.id,
         state: filters.value.state,
-        states: filters.value.state === '全部' ? options_status
-        : [filters.value.state],
+        states: filters.value.state === '全部' ? options_status : [filters.value.state],
         currentPage: page.value.currentPage,
         pageSize: page.value.pageSize
     };
@@ -115,7 +126,7 @@ const handleDelete = (row) => {
     </div>
     <div class="content-container">
         <el-table :data="tableData" style="width: 100%" strip border >
-            <el-table-column v-for="item in tableProp" :key="item.prop" :prop="item.prop" :label="item.label" width="150px" />
+            <el-table-column v-for="item in tableProp" :key="item.prop" :prop="item.prop" :label="item.label" width="165px" />
             <el-table-column fixed="right" label="操作" min-width="120">
             <template #default="scope">
                 <el-button type="primary" size="small" @click="handleEdit(scope.row, scope.column, scope.$index, scope.store)">编辑</el-button>
@@ -138,113 +149,6 @@ const handleDelete = (row) => {
 </div>
 
 </template>
-
-
-<!-- <style scoped>
-.page-container {
-    height: 100%;
-    overflow: hidden;
-    margin: 10px 20px;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--morand-bg-light); /* 使用全局背景色 */
-    border-radius: 8px;
-}
-
-.title-container {
-    height: 60px;
-    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
-    border-radius: 10px 10px 0 0;
-}
-
-.toolbar-container {
-    height: auto;
-    background-color: var(--morand-bg-light); /* 使用全局背景色 */
-    padding: 15px 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 15px;
-    border-bottom: 1px solid var(--morand-border); /* 使用全局边框颜色 */
-}
-
-:deep(.el-form) {
-    .el-input,
-    .el-select,
-    .el-button {
-        height: 35px;
-        line-height: 35px;
-        border-radius: 6px;
-    }
-
-    .el-input__inner {
-        border-color: var(--morand-border); /* 使用全局边框颜色 */
-    }
-
-    .el-input__inner:focus {
-        border-color: var(--morand-primary); /* 使用全局主色调 */
-    }
-}
-
-.el-form-item {
-    margin: 5px;
-}
-
-:deep(.el-button) {
-    background-color: var(--morand-primary); /* 使用全局主色调 */
-    color: white; /* 文字颜色保持白色 */
-    font-weight: bold;
-    border: none;
-    transition: all 0.3s;
-}
-
-:deep(.el-button:hover) {
-    background-color: var(--morand-secondary); /* 使用全局次要色调 */
-}
-
-.content-container {
-    flex: 1;
-    overflow: auto;
-    background-color: var(--morand-bg-light); /* 使用全局背景色 */
-    padding: 15px;
-    border-radius: 0 0 10px 10px;
-}
-
-:deep(.el-table) {
-    border-radius: 8px;
-    background-color: var(--morand-bg-light); /* 使用全局背景色 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-:deep(.el-table .el-table__row:nth-child(odd)) {
-    background-color: var(--morand-bg-light); /* 使用全局背景色 */
-}
-
-:deep(.el-pagination) {
-    margin: 15px 0;
-    text-align: center;
-    background-color: var(--morand-bg-light); /* 使用全局背景色 */
-    padding: 10px;
-    border-radius: 8px;
-}
-
-:deep(.el-select-dropdown__item.selected) {
-    background-color: var(--morand-primary); /* 使用全局主色调 */
-    color: white; /* 文字颜色保持白色 */
-}
-
-:deep(.el-select-dropdown__item:hover) {
-    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
-}
-</style> -->
 
 
 <style scoped>
@@ -290,10 +194,6 @@ const handleDelete = (row) => {
         height: 35px;
         line-height: 35px;
         border-radius: 6px;
-    }
-
-    .el-input__inner {
-        /* border-color: var(--morand-border); /* 使用全局边框颜色 */
     }
 
     .el-input__inner:focus {

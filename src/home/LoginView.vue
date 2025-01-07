@@ -1,10 +1,9 @@
 <script setup>
-    //import { ElInput, ElButton, ElForm, ElFormItem } from 'element-plus';
+    // 保持原有的 script 部分不变
     import {ref} from 'vue'
-    import axios from 'axios'
-    // import store from '../store/index.js'
     import { useStore } from 'vuex'
     import { useRouter } from 'vue-router'
+    import { login } from "@/axios/rootRequest.js"
 
     const store = useStore();
     const router = useRouter();
@@ -16,46 +15,22 @@
 
     const msg = ref('');
 
-    // import instance from "@/axios/instance.js"
-    // 自己配置了baseconfig，就可以按照某种格式传递数据
-    // 设置了拦截器，进行某种变换
-    // instance({
-    //     method: 'post',
-    //     url: '/login',
-    //     data
-    // });
-    // 通过axios可以设置，不具有通用性
-    // axios({
-    //     method: 'post',
-    //     url: 'login',
-    //     data
-    // });
-
-    import { login } from "@/axios/rootRequest.js"
     const handleLogin = () => {
         let params = {
             username: userinfo.value.username,
             password: userinfo.value.password
         }
-        // axios.post(url, data, config);
-        // data 是作为请求体
-        // config 内部包含params变量,通常会自动加入到url中        
-        // let {username} = usr
-        // 将usr中的username变量提取出来
+        
         login(params)
         .then((res) => {
-            console.log(res);
             if(res.code === 200){
-
-                // 用户名和密码正确，跳转到系统首页
                 store.commit('User/setToken', res.data.token);
                 store.commit('User/setUserName', res.data.username);
-                // 跳转到系统首页
                 msg.value = '登录成功跳转到系统首页';
-                // router.push({name:'HomeFrame'});
+                console.log(res.data.username);
+                console.log('getUsername' + store.getters['User/getUserName']);
                 router.push('/');
             } else {
-                // 提示用户名或密码错误，清空输入框
                 msg.value = '用户名或密码输入错误，请重新输入';
             }
         }).catch((err) => {
@@ -63,96 +38,147 @@
             console.log(err);
         });
 
-        // 与后台通信
-        // 得到结果
-        // 分析结果
-        // 正确调转到首页
-        // 不正确，提示信息，清空输出
         for(const i in userinfo.value) {
             userinfo.value[i]='';
         }
     }    
+    
     const clearWarn = () => {
         msg.value = '';
     }
-
 </script>
 
 <template>
-    <div class="login-box">
-        <div class="login-avatar">
-             <img src="@/assets/login.png">
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-avatar">
+                <img src="@/assets/login.png" alt="Login Avatar">
+            </div>
+            <div class="login-form-container">
+                <h2 class="login-title">欢迎登录</h2>
+                <el-form class="login-form" :model="userinfo">
+                    <el-form-item>
+                        <el-input 
+                            placeholder="请输入账号" 
+                            v-model="userinfo.username" 
+                            @focus="clearWarn"
+                            prefix-icon="User"
+                        />
+                    </el-form-item>
+                    <el-form-item>
+                        <el-input 
+                            placeholder="请输入密码" 
+                            type="password" 
+                            show-password 
+                            v-model="userinfo.password"
+                            prefix-icon="Lock"
+                        />
+                    </el-form-item>
+                    <el-form-item>
+                        <div class="button-group">
+                            <el-button type="primary" @click="handleLogin">登录</el-button>
+                            <el-button @click="clearWarn">重置</el-button>
+                            <el-button>
+                                <router-link to="/register" class="register-link">注册</router-link>
+                            </el-button>
+                        </div>
+                    </el-form-item>
+                    <el-form-item>
+                        <p class="error-message">{{ msg }}</p>
+                    </el-form-item>
+                </el-form>
+            </div>
         </div>
-        <el-form class="login-form" :model="userinfo">
-            <el-form-item>
-                <el-input placeholder="请输入账号" v-model="userinfo.username" @focus="clearWarn"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-input placeholder="请输入密码" type="password" show-password v-model=
-                "userinfo.password"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <div class="mb-4 button">
-                    <el-button type="primary" @click="handleLogin">登录</el-button>
-                    <el-button type="info" @click="clearWarn">重置</el-button>
-                    <el-button type="info">
-                        <router-link to="/register">注册</router-link>
-                    </el-button>
-                </div>
-            </el-form-item>
-            <el-form-item>
-                <p>{{ msg }}</p>
-            </el-form-item>
-        </el-form>
     </div>
 </template>
 
+
+
 <style scoped>
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--morand-bg-light);
+}
+
+.login-box {
+    width: 420px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    position: relative;
+    padding: 20px;
+    height: 37vh;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login-avatar {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: -70px auto 20px;
+}
+
 .login-avatar > img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    border: 4px solid #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-.login-form {
-    width: 100%;
-    height: 250px;
-    padding: 50px;
-    box-sizing: border-box;
-    border-radius: 0 0 20px 20px;
-    background-color: coral;
 
-    position: absolute;
-    bottom: 0;
+.login-form-container {
+    padding: 20px;
 }
-.login-box {
-    height: 400px;
-    width: 600px;
-    background-color: aquamarine;
-    border-radius: 20px;
-    position:absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+
+.login-title {
+    text-align: center;
+    color: var(--morand-text-primary);
+    font-size: 24px;
+    margin-bottom: 30px;
 }
-.login-avatar {
-    width: 150px;
-    height: 150px;
-    background-color: blanchedalmond;
-    border-radius: 75px;
-    border: 4px solid grey;
-    position: absolute;
-    left: 50%;
-    top: 0%;
-    transform: translate(-50%, -50%);
-    /* 对内部的留白 */
-    margin: 2px;
-    box-sizing: border-box;
-}
-.button {
-    width: 100%;
-    height: 100%;
-    /* background-color: aqua; */
+
+
+.button-group {
     display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-group .el-button {
+    flex: 1;
+    height: 40px;
+}
+
+:deep(.el-button--primary) {
+    background-color: var(--morand-primary);
+    border-color: var(--morand-primary);
+}
+
+:deep(.el-button--primary:hover) {
+    background-color: var(--morand-secondary);
+    border-color: var(--morand-secondary);
+}
+
+:deep(.el-form-item__content) {
     justify-content: center;
 }
+
+.register-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.error-message {
+    text-align: center;
+    color: #ff6b6b;
+    margin-top: 10px;
+    font-size: 14px;
+}
 </style>
+
+
+
+

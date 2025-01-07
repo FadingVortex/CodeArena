@@ -121,14 +121,14 @@ const freshPageData = () => {
 }
 
 const handelQuery = () => {
-    // freshPageData();
+    freshPageData();
 
-    queryQuestion(LMC.value).then(res => {
-        console.log(res);
-        tableData.value = res.data.tableData;
-    }).catch(err => {
+    // queryQuestion(LMC.value).then(res => {
+    //     console.log(res);
+    //     tableData.value = res.data.tableData;
+    // }).catch(err => {
 
-    });
+    // });
 
 }
 

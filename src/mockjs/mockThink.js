@@ -1002,7 +1002,7 @@ export const JobQueryPage = (opt) => {
     res = res.filter(el => states.includes(el.state));
   }
   // let tableData = res.splice((currentPage - 1) * pageSize, pageSize);
-  let tableData = findData.slice((currentPage - 1)*pageSize, pageSize);
+  let tableData = res.slice((currentPage - 1)*pageSize, pageSize);
 
   return {
     code: 200,
