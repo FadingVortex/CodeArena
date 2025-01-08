@@ -132,7 +132,8 @@ const handelQuery = () => {
 
 }
 
-const handleEdit = (row, column, index, store) => {
+const handleEdit = (row, column, index, store, scope) => {
+    console.log(scope);
     console.log('edit');
     console.log(row);
     console.log(column);
@@ -141,17 +142,41 @@ const handleEdit = (row, column, index, store) => {
 }
 
 const handleDelete = (row, index) => {
-    // index就是row在tabledata数组中的索引值
-    console.log('单击了表格上的某一行？的删除按钮');
-    console.log(row.id);
-    // deleteQuestions(传递一个整数数组)
-    deleteQueryQuestions(row.id).then(res => {
-        console.log(res);
-        tableData.value.splice(index, 1);
-    }).catch(err => {
-        console.log(err);
-    });
+    ElMessageBox.confirm(
+    'proxy will permanently delete the file. Continue?',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+        // index就是row在tabledata数组中的索引值
+        console.log('单击了表格上的某一行？的删除按钮');
+        console.log(row.id);
+        // deleteQuestions(传递一个整数数组)
+        deleteQueryQuestions(row.id).then(res => {
+            console.log(res);
+            // tableData.value.splice(index, 1);
+            freshPageData();
+        }).catch(err => {
+            console.log(err);
+        });
+      ElMessage({
+        type: 'success',
+        message: 'Delete completed',
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Delete canceled',
+      })
+    })
 }
+
+
 
 const page = ref({
     currentPage: 1,
@@ -206,11 +231,11 @@ const LMC = computed(() => {
             <el-table-column prop="LMC" label="分区" width="100" />
             <el-table-column prop="id" label="题号" width="100" />
             <el-table-column prop="title" label="题目" width="180" />
-            <el-table-column prop="pass" label="通过数" width="120" />
-            <el-table-column prop="submit" label="提交数" width="120" />
+            <el-table-column prop="pass" label="通过数" sortable width="120" />
+            <el-table-column prop="submit" label="提交数" sortable width="120" />
             <el-table-column fixed="right" label="Operations" min-width="120">
             <template #default="scope">
-                <el-button type="primary" size="small" @click="handleEdit(scope.row, scope.column, scope.$index, scope.store)">编辑</el-button>
+                <el-button type="primary" size="small" @click="handleEdit(scope.row, scope.column, scope.$index, scope.store, scope)">编辑</el-button>
                 <el-button type="danger" size="small" @click="handleDelete(scope.row, scope.$index)">删除</el-button>
             </template>
             </el-table-column>

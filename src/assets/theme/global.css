@@ -1,0 +1,13 @@
+:root {
+    --el-menu-active-color: black !important;
+    --el-menu-hover-bg-color: var(--morand-bg-light) !important;
+
+    --el-color-primary: var(--morand-primary);
+}
+
+
+/* .el-button {
+    --el-button-hover-bg-color: var(--morand-bg-medium);
+    --el-button-hover-text-color: var(--morand-text-primary);
+} */
+

@@ -13,7 +13,8 @@ export default {
             return state.token;
         },
         getUserName(state) {
-            return state.userInfor.username;
+            if(!! localStorage.getItem('Username')) return localStorage.getItem('Username');
+            else return state.userInfor.username;
         },
         isLogin(state) {
             return !! state.token || !! localStorage.getItem('myvue_login_token');
@@ -26,6 +27,7 @@ export default {
             console.log("setToken:" + state.token);
         },
         setUserName(state, username) {
+            localStorage.setItem('Username', username);
             state.userInfor.username = username;
         },
         clearToken(state){

@@ -113,17 +113,16 @@ const handleItemClick = (item,sub) => {
         @close="handleClose"
       >
         <template v-for="(sub, pt) in menu" :key="pt">
-            <el-sub-menu v-if="sub.children!==undefined" :index="sub.index"
-            >
+            <el-sub-menu v-if="sub.children!==undefined" :index="sub.index" >
             <template #title>
                 <el-icon>
                     <component :is="sub.icon"></component>
                 </el-icon>
                 <span>{{sub.title}}</span>
             </template>
-                <el-menu-item v-for="item in sub.children" :key="item.index" :index="item.index" :route="item.path" >
-                    {{ item.title }}
-                </el-menu-item>
+            <el-menu-item v-for="item in sub.children" :key="item.index" :index="item.index" :route="item.path" >
+                {{ item.title }}
+            </el-menu-item>
             </el-sub-menu>
             <el-menu-item v-else :index="sub.index" :route="sub.path">
                 <el-icon><component :is="sub.icon"></component></el-icon>

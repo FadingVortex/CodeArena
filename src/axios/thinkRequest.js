@@ -18,7 +18,10 @@ export const queryQuestion = (value) => {
 
 export const deleteQueryQuestions = (value) => {
     //第一步： 对形参value进行判断，数值还是数组
-    let data = (value instanceof Array) ? { ids: value } : { ids: [value] };
+    // let data = (value instanceof Array) ? { ids: value } : { ids: [value] };
+
+    // 应该要传送一个id
+    let data = (value instanceof Array) ? value[0] : value;
     //通过instance发送请求
     let url = '/think/delete/questions';
     return instance({

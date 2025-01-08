@@ -1,11 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
+// import ElementPlus from 'element-plus'
 import * as ElIcons from "@element-plus/icons-vue"
 import './mockjs'
 import store from './store'
 import router from "./router/index.js"
 
+import './assets/theme/global.css'
 // import './assets/theme/Fresh-Mint.css';
 // import './assets/theme/Calm-Blue.css'
 // import './assets/theme/Warm-Apricot.css'

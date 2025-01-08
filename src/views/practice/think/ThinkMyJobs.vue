@@ -1,4 +1,5 @@
 <script setup>
+import { ElMessage } from 'element-plus';
 import { changeCurrent } from './ThinkData';
 import { queryJobs, ThinkJobDelete } from '@/axios/thinkRequest';
 
@@ -75,29 +76,57 @@ const handleEdit = (row, column, index, store) => {
 
 const handleDelete = (row) => {
     console.log(row);
+    let data = row.runid;
     // 用户确定删除
-    let data = {
-        runids: [row.runid],
-        username: store.getters["User/getUserName"],
-        id: filters.value.id,
-        state: filters.value.state,
-        states: filters.value.state === '全部' ? options_status : [filters.value.state],
-        currentPage: page.value.currentPage,
-        pageSize: page.value.pageSize
-    };
-    console.log(data);
+    // let data = {
+    //     runids: [row.runid],
+    //     username: store.getters["User/getUserName"],
+    //     id: filters.value.id,
+    //     state: filters.value.state,
+    //     states: filters.value.state === '全部' ? options_status : [filters.value.state],
+    //     currentPage: page.value.currentPage,
+    //     pageSize: page.value.pageSize
+    // };
     ThinkJobDelete(data).then(res => {
         console.log(res);
         if(res.code === 200) {
-            page.value.total = res.data.total;
-            tableData.value = res.data.tableData;
-            tableProp.value = res.data.tableProp;
+            // page.value.total = res.data.total;
+            // tableData.value = res.data.tableData;
+            // tableProp.value = res.data.tableProp;
+            ElMessage.success(res.msg);
+            freshPageData();
+        } else {
+            // 提示用户删除失败
+            ElMessage.error(res.msg);
         }
     }).catch(err => {
 
     });
     console.log("delete finished");
 }
+
+const freshPageData = () => {
+    let data = {
+        username: store.getters['User/getUserName'],
+        id: filters.value.id,
+        state: filters.value.state,
+        pageSize: page.value.pageSize,
+        currentPage: page.value.currentPage
+    }
+    if(filters.value.state !== '' && filters.value.state !== undefined) {
+        data['states'] = filters.value.state === '全部' ? options_status : [filters.value.state];
+    }
+    queryJobs(data).then(res => {
+        if(res.code === 200) {
+            tableData.value = res.data.tableData;
+            tableProp.value = res.data.tableProp;
+            page.value.total = res.data.total;
+        }
+    }).catch(err => {
+        console.log("something error");
+    });   
+}
+
 
 </script>
 
@@ -126,7 +155,7 @@ const handleDelete = (row) => {
     </div>
     <div class="content-container">
         <el-table :data="tableData" style="width: 100%" strip border >
-            <el-table-column v-for="item in tableProp" :key="item.prop" :prop="item.prop" :label="item.label" width="165px" />
+            <el-table-column v-for="item in tableProp" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.prop === 'time' ? '165px' : '150px'" />
             <el-table-column fixed="right" label="操作" min-width="120">
             <template #default="scope">
                 <el-button type="primary" size="small" @click="handleEdit(scope.row, scope.column, scope.$index, scope.store)">编辑</el-button>
@@ -215,6 +244,16 @@ const handleDelete = (row) => {
 
 :deep(.el-button:hover) {
     background-color: var(--morand-secondary); /* 使用全局次要色调 */
+}
+
+:deep(.el-button--danger) {
+    background-color: var(--morand-danger); /* 使用全局危险色调 */
+    border-color: var(--morand-danger); /* 使用全局危险色调 */
+}
+
+:deep(.el-button--danger:hover) {
+    background-color: var(--morand-warning); /* 使用全局警告色调 */
+    border-color: var(--morand-warning); /* 使用全局警告色调 */
 }
 
 .content-container {

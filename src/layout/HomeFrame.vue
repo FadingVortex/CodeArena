@@ -99,6 +99,13 @@ import LayoutHeader from './LayoutHeader.vue';
     font-weight: bold;
 }
 
+/* :deep(.el-menu-item.is-active) {
+    color: var(--morand-success);
+} */
+
+
+
+
 /* 自定义滚动条样式 */
 ::-webkit-scrollbar {
     width: 6px;
