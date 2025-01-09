@@ -20,7 +20,7 @@ const menu = [
         {
             index: '1-3',
             title: '软件开发',
-            path: '/course/soft/home',
+            path: '/course/edit/home',
         }
     ]
   }, 

@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue';
 import { options, deleteQueryQuestions, queryQuestionByPage} from '@/axios/thinkRequest'
 import { changeCurrent } from './think/ThinkData';
 import { queryQuestion } from '../../axios/thinkRequest';
+import { useRouter } from 'vue-router'
 
 // 定义select的已选中的标签
 const form = ref({
@@ -16,6 +17,7 @@ const modules = ref([]);
 const chapters = ref([]);
 // 表格的数据
 const tableData = ref([]);
+const router = useRouter();
 
 // HomeThink.vue 初始化数据，从后端提取数据
 onMounted(() => {
@@ -106,12 +108,12 @@ const freshPageData = () => {
     // else if(form.value.module !== '') data['LMC'] = form.value.module;
     // else if(form.value.level !== '') data['LMC'] = form.value.level;
     // else data['LMC'] = ''; 
-    console.log(data);
-    console.log('计算属性值');
+    // console.log(data);
+    // console.log('计算属性值');
 
     queryQuestionByPage(data).then(res => {
         console.log("queryQuestionByPage.then");
-        console.log(res);
+        // console.log(res);
         tableData.value = res.data.tableData;
         page.value.total = res.data.total;
     }).catch(err => {
@@ -122,23 +124,11 @@ const freshPageData = () => {
 
 const handelQuery = () => {
     freshPageData();
-
-    // queryQuestion(LMC.value).then(res => {
-    //     console.log(res);
-    //     tableData.value = res.data.tableData;
-    // }).catch(err => {
-
-    // });
-
 }
 
 const handleEdit = (row, column, index, store, scope) => {
-    console.log(scope);
     console.log('edit');
-    console.log(row);
-    console.log(column);
-    console.log(index);
-    console.log(store);
+    router.push({ path: '/course/edit/home', query: { id: row.id } });
 }
 
 const handleDelete = (row, index) => {
@@ -193,6 +183,14 @@ const LMC = computed(() => {
     console.log("LMC=" + str);
     return str;
 })
+
+onActivated(() => {
+    freshPageData();
+});
+
+onDeactivated(() => {
+
+});
 
 </script>
 <template>

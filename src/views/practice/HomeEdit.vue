@@ -1,6 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { getCurrentInstance, ref, watch } from 'vue';
+import { queryQuestionById, updateQuestion, addQuestion} from '@/axios/editRequest';
 
+const { proxy } = getCurrentInstance();
 const selectedValue = ref([]);
 const options = ref([
   {
@@ -182,6 +184,9 @@ const options = ref([
   },
 ]);
 
+let editor = null;
+let isEditStatus = ref(true);
+
 // 表单数据
 const formData = ref({
   id: '', // 题号
@@ -197,7 +202,7 @@ const rules = ref({
 
 // 级联选择器变化事件
 const handleChange = (value) => {
-  console.log('Selected value:', value);
+  // console.log('Selected value:', value);
 };
 
 // 路由和表单引用
@@ -208,77 +213,179 @@ const editForm = ref(null);
 // 加载题目数据
 const loadData = async () => {
   const id = route.query.id; // 从路由参数获取题号
-  const res = await getQuestionData(id); // 调用后端接口
-  formData.value = res.data;
+  queryQuestionById(id).then((res) => {
+    console.log("res");
+    console.log(res);
+    formData.value = res.data[0];
+    // selectedValue.value = formData.value.LMC;
+  }).catch((err) => {
+    console.error(err);
+  });
 };
 
-// 保存编辑
+
+const initEditor = async () => {
+  try {
+    editor = await proxy.$initEditor("editor", {
+      markdown: formData.value.content || "# 输出第二个整数",
+      onload: () => {
+        console.log('Editor loaded successfully');
+      }
+    });
+  } catch (error) {
+    console.error('Failed to initialize editor:', error);
+  }
+};
+
+
 const handleSubmit = async () => {
+  console.log('Submit form data:', formData.value);
+  if (!editForm.value) return;
   editForm.value.validate(async (valid) => {
     if (valid) {
-      try {
-        await updateQuestion(formData.value); // 调用后端保存接口
-        ElMessage.success('保存成功');
-        router.push('/manage'); // 返回管理页面
-      } catch (error) {
-        ElMessage.error('保存失败，请重试');
+      // Get editor content before submitting
+      if (editor) {
+        formData.value.content = editor.getMarkdown();
+      }
+      if(isEditStatus.value) {
+        // 提交表单数据
+        console.log('UPDATE-Form data id:', formData.value.id);
+        
+        // await updateQuestion(formData.value);
+        updateQuestion(formData.value).then((res) => {
+          console.log("updateQuestion" + res);
+          if(res.code === 200) {
+            ElMessage.success('保存成功');
+            router.push('/course/think/home');
+          } else {
+            ElMessage.error('保存失败，请重试');
+          }
+        }).catch((err) => {
+          console.error(err);
+          ElMessage.error('保存失败，请重试');
+        });
+      } else {
+        // 提交表单数据
+        console.log('ADD-Form data id:', formData.value.id);
+        addQuestion(formData.value).then((res) => {
+          console.log("addQuestion" + res);
+          if(res.code === 200) {
+            ElMessage.success('添加成功');
+            // router.push('/course/think/home');
+          } else {
+            ElMessage.error('添加失败，请重试');
+          }
+        }).catch((err) => {
+          console.error(err);
+          ElMessage.error('添加失败，请重试');
+        })
       }
     }
   });
 };
 
-// 取消编辑
 const handleCancel = () => {
-  router.push('/manage'); // 返回管理页面
-};
-
-// 获取题目数据（模拟后端接口）
-const getQuestionData = (id) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        data: { id: id, LMC: 'L1-1-1', title: '示例题目' },
-      });
-    }, 500);
+  ElMessageBox.confirm('确定要取消当前操作吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    router.push('/course/think/home');
+  }).catch(() => {
+    console.log('取消操作');
   });
 };
 
-// 更新题目数据（模拟后端接口）
-const updateQuestion = (data) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ message: '更新成功' });
-    }, 500);
-  });
-};
 
-// 组件挂载时加载数据
-onMounted(() => {
-  loadData();
+onMounted(async () => {
+  if(!!route.query.id){
+    isEditStatus.value = true;
+    await loadData();
+  } else {
+    isEditStatus.value = false;
+    formData.value.id = '';
+  }
+  await initEditor();
 });
+
+onActivated(() => {
+    console.log('HomeThink activated');
+    if(!!route.query.id){
+      isEditStatus.value = true;
+      loadData();
+    } else {
+      isEditStatus.value = false;
+      formData.value.id = '';
+    }
+});
+
+onDeactivated(() => { 
+
+});
+
+
 </script>
 
-
 <template>
-    <div>
-      <el-form :model="formData" :rules="rules" ref="editForm">
+  <div class="edit-container">
+    <el-card>
+      <div slot="header" class="form-title">
+        <span v-if="isEditStatus">编辑题目</span>
+        <span v-else>添加题目</span>
+      </div>
+      <el-form :model="formData" :rules="rules" ref="editForm" label-width="80px">
         <el-form-item label="题号" prop="id">
-          <el-input v-model="formData.id" />
+          <el-input v-if="isEditStatus" v-model="formData.id" disabled></el-input>
+          <el-input v-else v-model="formData.id" placeholder="请输入题号"></el-input>
         </el-form-item>
+        
         <el-form-item label="分区" prop="LMC">
-            <el-cascader
-                v-model="selectedValue"
-                :options="options"
-                @change="handleChange"
-            />
+          <el-cascader
+            v-model="formData.LMC"
+            :options="options"
+            @change="handleChange"
+            style="width: 100%"
+          />
         </el-form-item>
+        
         <el-form-item label="题目" prop="title">
-          <el-input v-model="formData.title" />
+          <el-input type="text" v-model="formData.title" placeholder="请输入题目"></el-input>
         </el-form-item>
+
+        <el-form-item label="内容详情" prop="content">
+          <div id="editor"></div>
+        </el-form-item>
+
         <el-form-item>
           <el-button type="primary" @click="handleSubmit">保存</el-button>
           <el-button @click="handleCancel">取消</el-button>
         </el-form-item>
       </el-form>
-    </div>
-  </template>
+    </el-card>
+  </div>
+</template>
+
+<style scoped>
+
+.form-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    margin: 5px;
+    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
+    border-radius: 8px 8px 0 0;
+}
+
+.edit-container {
+  margin: 20px;
+}
+
+/* Add required Editor.md styles */
+:deep(.editormd) {
+  z-index: 1000;
+}
+</style>

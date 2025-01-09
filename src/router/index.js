@@ -10,9 +10,7 @@ const router = createRouter({
 
 // 守护进程，在每个路由请求之前检查路由请求
 router.beforeEach((to, form) => {
-    console.log(to);
     const haveToken = store.getters['User/isLogin'];
-    console.log(haveToken);
     if (to.path === '/login') {
         // 返回一个路由对象，即换一个路由对象
         if (haveToken === true) return { name: 'HomeFrame' };

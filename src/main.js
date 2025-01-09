@@ -5,6 +5,7 @@ import * as ElIcons from "@element-plus/icons-vue"
 import './mockjs'
 import store from './store'
 import router from "./router/index.js"
+import EditorPlugin from './plugins/editor.js'
 
 import './assets/theme/global.css'
 // import './assets/theme/Fresh-Mint.css';
@@ -13,7 +14,7 @@ import './assets/theme/global.css'
 // import './assets/theme/Warm-Earth.css'
 // import './assets/theme/Elegant-Lavender.css'
 
-const app = createApp(App).use(store).use(router);
+const app = createApp(App).use(store).use(router).use(EditorPlugin);
 
 // 注册 Element Plus 图标
 for (const name in ElIcons) {
@@ -33,6 +34,9 @@ function loadTheme(themeName) {
     document.head.appendChild(link);
   });
 }
+
+
+
 
 // 暴露主题切换方法到全局
 app.config.globalProperties.$switchTheme = async (themeName) => {

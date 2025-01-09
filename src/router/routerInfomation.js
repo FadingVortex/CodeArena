@@ -34,9 +34,9 @@ const childrenHomeFrame = [
         mata: { requireAuth: true },
     },
     {
-        path: '/course/soft/home',
-        component: () => import('@/views/practice/HomeEdit.vue'),
-        name: 'HomeSoft',
+        path: '/course/edit/home',
+        component: () => import('@/views/practice/edit/EditFrame.vue'),
+        name: 'EditFrame',
         mata: { requireAuth: true },
     },
     {
