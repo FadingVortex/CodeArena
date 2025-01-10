@@ -36,8 +36,6 @@ function loadTheme(themeName) {
 }
 
 
-
-
 // 暴露主题切换方法到全局
 app.config.globalProperties.$switchTheme = async (themeName) => {
   const oldLink = document.getElementById('theme-style');

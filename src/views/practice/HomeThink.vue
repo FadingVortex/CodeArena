@@ -117,7 +117,7 @@ const freshPageData = () => {
         tableData.value = res.data.tableData;
         page.value.total = res.data.total;
     }).catch(err => {
-
+        console.log(err);
     });
 
 }

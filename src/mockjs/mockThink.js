@@ -1,4 +1,4 @@
-const options=[
+export const options=[
     {
       label:'一、语言及算法基础篇',
       value:'L1', 
