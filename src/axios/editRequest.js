@@ -1,4 +1,5 @@
-import instance from './instance.js'
+import instance from './instance.js';
+import axios from 'axios';
 
 export const queryQuestionById = (value) => {
     return instance({
@@ -22,3 +23,7 @@ export const addQuestion = (value) => {
         data: value
     })
 }
+
+export const uploadPdf = (pdfString) => {
+  return axios.post('/api/upload/pdf', { pdfString });
+};
