@@ -233,14 +233,20 @@ onDeactivated(() => {
 
 <template>
   <div class="edit-container">
-    <el-card>
-      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-        <el-tab-pane label="User" name="first">
-          <div slot="header" class="form-title">
-            <span v-if="isEditStatus">编辑题目</span>
-            <span v-else>添加题目</span>
+    <el-card class="edit-card">
+      <el-tabs v-model="activeName" class="custom-tabs" @tab-click="handleTabClick">
+        <el-tab-pane label="基本信息" name="first">
+          <div class="form-header">
+            <h2 class="form-title">{{ isEditStatus ? '编辑题目' : '添加题目' }}</h2>
           </div>
-          <el-form :model="formData" :rules="rules" ref="editForm" label-width="80px">
+          
+          <el-form 
+            :model="formData" 
+            :rules="rules" 
+            ref="editForm" 
+            label-width="100px"
+            class="edit-form"
+          >
             <el-form-item label="题号" prop="id">
               <el-input v-if="isEditStatus" v-model="formData.id" disabled></el-input>
               <el-input v-else v-model="formData.id" placeholder="请输入题号"></el-input>
@@ -263,50 +269,49 @@ onDeactivated(() => {
               <div id="editor"></div>
             </el-form-item>
 
-            <el-form-item>
-              <el-button type="primary" @click="handleSubmit">保存</el-button>
-              <el-button @click="handleCancel">取消</el-button>
+            <el-form-item class="form-actions">
+              <el-button type="primary" @click="handleSubmit" size="large">保存</el-button>
+              <el-button @click="handleCancel" size="large">取消</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="PDF" name="second">
-          <el-upload
-            class="upload-demo"
-            drag
-            action="#"
-            :auto-upload="false"
-            :before-upload="beforeUpload"
-            :on-change="handleUploadSuccess"
-            :on-preview="handlePreview"
-            :file-list="fileList"
-            :multiple="false"
-          >
-            <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-            <div class="el-upload__text">
-              拖拽 PDF 文件到此处或 <em>点击上传</em>
+
+        <el-tab-pane label="PDF附件" name="second">
+          <div class="pdf-container">
+            <div class="upload-section">
+              <h3 class="section-title">PDF 上传</h3>
+              <el-upload
+                class="pdf-uploader"
+                drag
+                action="#"
+                :auto-upload="false"
+                :before-upload="beforeUpload"
+                :on-change="handleUploadSuccess"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :multiple="false"
+              >
+                <div class="upload-content">
+                  <el-icon class="upload-icon"><upload-filled /></el-icon>
+                  <div class="upload-text">
+                    <span class="upload-main-text">拖拽 PDF 文件到此处或点击上传</span>
+                    <span class="upload-sub-text">单个文件不超过 5MB</span>
+                  </div>
+                </div>
+              </el-upload>
             </div>
-            <template #tip>
-              <div class="el-upload__tip">
-                仅支持 PDF 文件，大小不超过 5MB
+
+            <div v-if="pdfUrl" class="preview-section">
+              <h3 class="section-title">PDF 预览</h3>
+              <div class="pdf-preview-container">
+                <iframe 
+                  :src="pdfUrl" 
+                  class="pdf-preview-frame"
+                  frameborder="0"
+                ></iframe>
               </div>
-            </template>
-          </el-upload>
-
-          <!-- PDF 预览区域 -->
-          <div v-if="pdfUrl" class="pdf-preview" ref="pdfViewerRef">
-            <h3>PDF 预览</h3>
-            <iframe 
-              :src="pdfUrl" 
-              width="100%" 
-              height="600px" 
-              frameborder="0"
-              style="border: 1px solid #dcdfe6; border-radius: 4px;"
-            ></iframe>
-          </div>
-
-          <!-- 上传按钮 -->
-          <div class="upload-button">
-            <el-button type="primary" @click="handleSubmit">上传 PDF</el-button>
+            </div>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -316,40 +321,170 @@ onDeactivated(() => {
 
 <style scoped>
 
-.pdf-preview {
-  margin-top: 20px;
+.edit-container {
   padding: 20px;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+  background-color: var(--morand-bg-light);
+  min-height: calc(100vh - 120px);
 }
 
-.pdf-preview h3 {
+.edit-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(137, 149, 159, 0.1);
+  border: 1px solid var(--morand-border);
+}
+
+.custom-tabs :deep(.el-tabs__nav-wrap::after) {
+  height: 1px;
+  background-color: var(--morand-border);
+}
+
+.custom-tabs :deep(.el-tabs__item) {
+  color: var(--morand-text-secondary);
+}
+
+.custom-tabs :deep(.el-tabs__item.is-active) {
+  color: var(--morand-primary);
+}
+
+.custom-tabs :deep(.el-tabs__active-bar) {
+  background-color: var(--morand-primary);
+}
+
+.form-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--morand-border);
+}
+
+.form-title {
+  margin: 0;
+  color: var(--morand-text-primary);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.edit-form {
+  /* max-width: 800px; */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-actions {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.form-actions :deep(.el-button--primary) {
+  background-color: var(--morand-primary);
+  border-color: var(--morand-primary);
+}
+
+.form-actions :deep(.el-button--primary:hover) {
+  background-color: var(--morand-secondary);
+  border-color: var(--morand-secondary);
+}
+
+.form-actions :deep(.el-button--default) {
+  border-color: var(--morand-border);
+  color: var(--morand-text-secondary);
+}
+
+.pdf-container {
+  padding: 20px;
+}
+
+.upload-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  margin: 0 0 20px;
+  color: var(--morand-text-primary);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pdf-uploader {
+  border: 1px dashed var(--morand-border);
+  border-radius: 8px;
+  background-color: var(--morand-bg-light);
+  transition: border-color 0.3s;
+}
+
+.pdf-uploader:hover {
+  border-color: var(--morand-primary);
+}
+
+.upload-content {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 48px;
+  color: var(--morand-secondary);
   margin-bottom: 16px;
-  color: #303133;
+}
+
+.upload-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-main-text {
+  color: var(--morand-text-primary);
   font-size: 16px;
 }
 
-
-.form-title {
-    font-size: 15px;
-    font-weight: bold;
-    color: var(--morand-text-primary); /* 使用全局主要文字颜色 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 0;
-    margin: 5px;
-    background-color: var(--morand-bg-medium); /* 使用全局次级背景色 */
-    border-radius: 8px 8px 0 0;
+.upload-sub-text {
+  color: var(--morand-text-secondary);
+  font-size: 14px;
 }
 
-.edit-container {
-  margin: 20px;
+.preview-section {
+  margin-top: 40px;
 }
 
-/* Add required Editor.md styles */
-:deep(.editormd) {
-  z-index: 1000;
+.pdf-preview-container {
+  border: 1px solid var(--morand-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--morand-bg-light);
+}
+
+.pdf-preview-frame {
+  width: 100%;
+  height: 700px;
+  background: #fff;
+}
+
+:deep(.el-form-item__label) {
+  color: var(--morand-text-primary);
+}
+
+:deep(.el-input__inner) {
+  border-color: var(--morand-border);
+}
+
+:deep(.el-input__inner:focus) {
+  border-color: var(--morand-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .edit-container {
+    padding: 10px;
+  }
+
+  .edit-form {
+    padding: 10px;
+  }
+
+  .pdf-preview-frame {
+    height: 500px;
+  }
 }
 </style>
