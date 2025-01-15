@@ -2,7 +2,7 @@
 import $ from 'jquery';
 
 // Editor 配置对象
-const EditorConfig = {
+export const EditorConfig = {
   BASE_PATH: '/editor.md-master',
   DEPENDENCIES: {
     marked: '/editor.md-master/lib/marked.min.js',

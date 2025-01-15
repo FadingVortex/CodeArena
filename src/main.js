@@ -62,5 +62,6 @@ const defaultTheme = 'Elegant-Lavender';
 app.config.globalProperties.$switchTheme(defaultTheme)
   .catch((error) => console.error(`Failed to load default theme: ${error.message}`));
 
+window.app = app;
 
 app.mount('#app');

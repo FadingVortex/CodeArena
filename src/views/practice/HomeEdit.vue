@@ -1,15 +1,20 @@
 <script setup>
-import { getCurrentInstance, onMounted, ref, watch } from 'vue';
+import { getCurrentInstance, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { queryQuestionById, updateQuestion, addQuestion, uploadPdf } from '@/axios/editRequest';
 import { options as categoryOptions } from '@/mockjs/mockThink.js';
+// import EditorMd from '../../components/EditorMd.vue';
+import markdownEdito from '../../components/MarkdownEditor.vue';
+import Editor from '../../components/Editor.vue';
 
 const { proxy } = getCurrentInstance();
 const options = ref(categoryOptions);
 
 let editor;
-let isEditStatus = ref(true);
+const markdownView = ref(null);
+const isEditStatus = ref(true);
 const timeDealy = 1000;
 const activeName = ref('first');
+const showUploader = ref(false); 
 // 路由和表单引用
 const router = useRouter();
 const route = useRoute();
@@ -44,12 +49,10 @@ const loadData = async () => {
     console.log("res");
     console.log(res);
     formData.value = res.data[0];
-    // formData.value.pdfString = 'data:application/pdf;base64,' + res.data[0].pdfstring
+
     console.log(formData.value.id);
     if(res.data[0].pdfString != null) formData.value.pdfString = res.data[0].pdfString;
     else formData.value.pdfString = '';
-    // console.log(formData.value.pdfString === null ? "pdfString is null" : "pdfString not null");
-    // selectedValue.value = formData.value.LMC;
   }).catch((err) => {
     console.error(err);
   });
@@ -113,7 +116,6 @@ const handleCancel = () => {
 };
 
 // Enhanced PDF handling
-const pdfViewerRef = ref(null);
 const currentPdfString = ref('');
 // PDF 上传相关函数
 const beforeUpload = (file) => {
@@ -179,8 +181,11 @@ const handlePreview = (uploadFile) => {
 };
 // Load existing PDF when editing
 watch(() => formData.value.pdfString, (newValue) => {
+  // 默认不会处理到undefined值时的情况，加上else以后就可以处理了
   if (newValue) {
     pdfUrl.value = `data:application/pdf;base64,${newValue}`;
+  } else {
+    pdfUrl.value = '';
   }
 }, { immediate: true });
 
@@ -208,20 +213,64 @@ const handleUploadPdf = async () => {
   }
 };
 
+const handleDrop = (event) => {
+  const files = event.dataTransfer.files;
+  if(files.length > 0) {
+    const file = files[0];
+    if(file.type !== "application/pdf") {
+      ElMessage.error('只能上传 PDF 文件');
+      return;
+    }
+    fileList.value = [file];
+    pdfUrl.value = URL.createObjectURL(file);
+    showUploader.value = false;
+  }
+}
+
+const showDragUploader = (event) => {
+  if (event.dataTransfer.items && event.dataTransfer.items.length > 0) {
+    showUploader.value = true;
+  }
+};
+
+const hideDragUploader = (event) => {
+  if (
+    pdfUrl.value &&
+    (event.relatedTarget === null || event.target.nodeName === "HTML")
+  ) {
+    showUploader.value = false;
+  }
+};
+
+
+// 绑定窗口拖拽事件，当发生时将uploader显示出来
+onMounted( () => {
+  window.addEventListener('dragenter', showDragUploader);
+  window.addEventListener('dragleave', hideDragUploader);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('dragenter', showDragUploader);
+  window.removeEventListener('dragleave', hideDragUploader);
+});
+
 onActivated(() => {
     console.log('HomeEdit activated');
     if(!!route.query.id){
       isEditStatus.value = true;
       loadData();
       setTimeout(() => {
-        initEditor();
+        // initEditor();
       }, timeDealy);
       // 从数据库获取已上传的 PDF
       // getExistingPdf();
+      // editor.setValue(formData.value.content);
+      // editor.previewing();
     } else {
       isEditStatus.value = false;
       formData.value.id = '';
-      initEditor();
+      formData.value.pdfString = '';
+      // initEditor();
     }
 });
 onDeactivated(() => { 
@@ -266,7 +315,11 @@ onDeactivated(() => {
             </el-form-item>
 
             <el-form-item label="内容详情" prop="content">
-              <div id="editor"></div>
+              <!-- <div id="editor"></div> -->
+               <!-- <EditorMd :content="formData.content" /> -->
+              <!-- <markdown-editor ref="markdownView" editor-id="editorId" :default-value="formData.content"></markdown-editor> -->
+               <Editor v-model="formData.content" />  
+
             </el-form-item>
 
             <el-form-item class="form-actions">
@@ -278,7 +331,13 @@ onDeactivated(() => {
 
         <el-tab-pane label="PDF附件" name="second">
           <div class="pdf-container">
-            <div class="upload-section">
+            <h6 v-if="!showUploader && pdfUrl" class="section-title">拖拽PDF上传</h6>
+            <div 
+              v-if="showUploader || !pdfUrl"
+              class="upload-section"
+              @dragover.prevent
+              @drop.prevent="handleDrop"
+            >
               <h3 class="section-title">PDF 上传</h3>
               <el-upload
                 class="pdf-uploader"
@@ -405,6 +464,13 @@ onDeactivated(() => {
   font-weight: 500;
 }
 
+h6.section-title {
+  margin: 0px;
+  color: var(--morand-text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+}
+
 .pdf-uploader {
   border: 1px dashed var(--morand-border);
   border-radius: 8px;
@@ -445,7 +511,7 @@ onDeactivated(() => {
 }
 
 .preview-section {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .pdf-preview-container {
