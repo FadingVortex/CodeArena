@@ -31,7 +31,7 @@ npm install jquery --save
 
 ### 文件结构如下
 
-<img src="D:\Study\Note\dictory" alt="image-20250114225254123" style="zoom: 67%;" />
+<img src="Editor-and-jwt.assets/dictory.png" alt="image-20250114225254123" style="zoom: 67%;" />
 
 ### 1. 配置 Editor 插件
 在项目 `src/plugins/` 目录下创建 `editor.js` 文件，用于封装 Editor 的初始化逻辑：
@@ -252,5 +252,5 @@ const content = ref('');
 
 **结果如图**
 
-![image-20250114225733900](D:\Study\Note\result)
+![image-20250114225733900](Editor-and-jwt.assets/result.png)
 

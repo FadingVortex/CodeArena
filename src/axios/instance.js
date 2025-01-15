@@ -39,7 +39,7 @@ instance.interceptors.response.use(
             }).then(() => {
                 // 确认后跳转到登录页
                 setTimeout(() => {
-                    router.push('/login');  // 使用 replace 以避免用户返回
+                    router.push('/login'); 
                 }, 200);
             }).catch(() => {
                 // 如果点击取消，也可以跳转或者做其他处理

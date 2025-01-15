@@ -124,8 +124,8 @@ const handleBack = () => {
 
 .register-form :deep(.el-input__inner) {
     height: 42px;
-    background-color: var(--morand-bg-light);
-    border: 1px solid var(--morand-border);
+    /* background-color: var(--morand-bg-light); */
+    /* border: 1px solid var(--morand-border); */
     border-radius: 8px;
 }
 
