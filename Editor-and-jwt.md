@@ -33,7 +33,7 @@ npm install jquery --save
 
 ### 文件结构如下
 
-<img src=".\pictures\dictory" alt="image-20250114225254123" style="zoom: 67%;" />
+<img src=".\Editor-and-jwt.assets\dictory" alt="image-20250114225254123" style="zoom: 67%;" />
 
 ### 1. 配置 Editor 插件
 
@@ -257,7 +257,7 @@ const content = ref('');
 
 **结果如图**
 
-![image-20250114225733900](.\pictures\result)
+![image-20250114225733900](.\Editor-and-jwt.assets\result)
 
 
 
